@@ -1,0 +1,14 @@
+[package]
+name = "hspee/robloxprojecttemplate"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+t = "osyrisrblx/t@3.1.1"
+Packet = "encrxyptedethan/packet-fork@1.7.0"
+Signal = "sleitnick/signal@2.0.3"
+TypedPromise = "howmanysmall/typed-promise@4.0.6"
+
+[server-dependencies]
+cmdr = "evaera/cmdr@1.12.0"

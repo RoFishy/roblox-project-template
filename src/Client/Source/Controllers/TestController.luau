@@ -1,0 +1,3 @@
+local TestController = {}
+
+return TestController

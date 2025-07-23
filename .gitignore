@@ -1,0 +1,7 @@
+sourcemap.json
+ServerPackages/
+Packages/
+**/*.rbx[lm]*
+
+**/sourcemap.json
+dist/
