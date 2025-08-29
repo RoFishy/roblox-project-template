@@ -1,3 +1,0 @@
-local TestController = {}
-
-return TestController

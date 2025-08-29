@@ -3,8 +3,18 @@
 registry = "test"
 
 [[package]]
-name = "encrxyptedethan/packet-fork"
-version = "1.7.0"
+name = "azutreo/replica"
+version = "1.0.1"
+dependencies = []
+
+[[package]]
+name = "csqrl/sift"
+version = "0.0.11"
+dependencies = []
+
+[[package]]
+name = "elttob/fusion"
+version = "0.3.0"
 dependencies = []
 
 [[package]]
@@ -18,6 +28,11 @@ version = "4.0.0"
 dependencies = []
 
 [[package]]
+name = "howmanysmall/janitor"
+version = "1.18.3"
+dependencies = [["Promise", "howmanysmall/typed-promise@4.0.6"]]
+
+[[package]]
 name = "howmanysmall/typed-promise"
 version = "4.0.6"
 dependencies = [["Promise", "evaera/promise@4.0.0"]]
@@ -25,11 +40,26 @@ dependencies = [["Promise", "evaera/promise@4.0.0"]]
 [[package]]
 name = "hspee/robloxprojecttemplate"
 version = "0.1.0"
-dependencies = [["Packet", "encrxyptedethan/packet-fork@1.7.0"], ["Signal", "sleitnick/signal@2.0.3"], ["TypedPromise", "howmanysmall/typed-promise@4.0.6"], ["t", "osyrisrblx/t@3.1.1"], ["cmdr", "evaera/cmdr@1.12.0"]]
+dependencies = [["Fusion", "elttob/fusion@0.3.0"], ["Janitor", "howmanysmall/janitor@1.18.3"], ["Lyra", "paradoxum-games/lyra@0.6.0"], ["Remo", "littensy/remo@1.5.2"], ["Replica", "azutreo/replica@1.0.1"], ["Sift", "csqrl/sift@0.0.11"], ["Signal", "sleitnick/signal@2.0.3"], ["TypedPromise", "howmanysmall/typed-promise@4.0.6"], ["UI-Labs", "pepeeltoro41/ui-labs@2.4.1"], ["t", "osyrisrblx/t@3.1.1"], ["cmdr", "evaera/cmdr@1.12.0"]]
+
+[[package]]
+name = "littensy/remo"
+version = "1.5.2"
+dependencies = [["Promise", "evaera/promise@4.0.0"]]
 
 [[package]]
 name = "osyrisrblx/t"
 version = "3.1.1"
+dependencies = []
+
+[[package]]
+name = "paradoxum-games/lyra"
+version = "0.6.0"
+dependencies = [["Promise", "evaera/promise@4.0.0"], ["t", "osyrisrblx/t@3.1.1"]]
+
+[[package]]
+name = "pepeeltoro41/ui-labs"
+version = "2.4.1"
 dependencies = []
 
 [[package]]

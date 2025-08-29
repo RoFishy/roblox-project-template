@@ -1,3 +1,0 @@
-local TestService = {}
-
-return TestService
