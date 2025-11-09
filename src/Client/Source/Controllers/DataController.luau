@@ -16,12 +16,12 @@ local DataCache = {
 local DataController = {}
 
 function DataController:Start()
-	Network.Data.SyncData:connect(function(OldData, NewData)
+	Network.Data.SyncData:connect(function(NewData, OldData)
 		if NewData == nil or NewData == DataCache.PlayerData then
 			return
 		end
 		DataCache.PlayerData = NewData
-		Signals.PlayerDataChanged:Fire(OldData, NewData)
+		Signals.PlayerDataChanged:Fire(NewData, OldData)
 	end)
 end
 
