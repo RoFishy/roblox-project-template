@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 type LogLevel = "Debugging" | "Information" | "Warning"
 
 -- // Utils
-local Log = require("@Utility/Log")
+local Log = require("@Shared/Utility/Log")
 
 -- // Packages
 local Promise = require("@Packages/TypedPromise")
@@ -173,8 +173,8 @@ function Bootstrapper.load(Folder: Folder)
 	assert(Folder, "A folder must be provided.")
 	assert(#Folder:GetChildren() > 0, "Folder is empty.")
 
-	return Promise.new(function(resolve)
-		Load(Folder):await()
+	return Promise.new(function(resolve, reject)
+		Load(Folder):catch(reject):await()
 		resolve()
 	end)
 end

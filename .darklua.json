@@ -12,12 +12,9 @@
                 "sources": {
                     "@Packages": "Packages/",
                     "@ServerPackages": "ServerPackages/",
-                    "@Services": "src/Server/Source/Services/",
-                    "@Controllers": "src/Client/Source/Controllers/",
-                    "@Shared": "src/Shared/",
-                    "@Utility": "src/Shared/Utility/",
-                    "@ServerUtility": "src/Server/Source/Utility/",
-                    "@ClientUtility": "src/Client/Source/Utility/"
+                    "@Server": "src/Server/Source/",
+                    "@Client": "src/Client/Source/",
+                    "@Shared": "src/Shared/"
                 }
             },
             "target": {

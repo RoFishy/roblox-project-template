@@ -40,7 +40,7 @@ dependencies = [["Promise", "evaera/promise@4.0.0"]]
 [[package]]
 name = "hspee/robloxprojecttemplate"
 version = "0.1.0"
-dependencies = [["Fusion", "elttob/fusion@0.3.0"], ["Janitor", "howmanysmall/janitor@1.18.3"], ["Lyra", "paradoxum-games/lyra@0.6.0"], ["Remo", "littensy/remo@1.5.2"], ["Replica", "azutreo/replica@1.0.1"], ["Sift", "csqrl/sift@0.0.11"], ["Signal", "sleitnick/signal@2.0.3"], ["TypedPromise", "howmanysmall/typed-promise@4.0.6"], ["UI-Labs", "pepeeltoro41/ui-labs@2.4.1"], ["t", "osyrisrblx/t@3.1.1"], ["cmdr", "evaera/cmdr@1.12.0"]]
+dependencies = [["Component", "sleitnick/component@2.4.8"], ["Fusion", "elttob/fusion@0.3.0"], ["Janitor", "howmanysmall/janitor@1.18.3"], ["Lyra", "paradoxum-games/lyra@0.6.0"], ["Remo", "littensy/remo@1.5.2"], ["Replica", "azutreo/replica@1.0.1"], ["Sift", "csqrl/sift@0.0.11"], ["Signal", "sleitnick/signal@2.0.3"], ["TypedPromise", "howmanysmall/typed-promise@4.0.6"], ["UI-Labs", "pepeeltoro41/ui-labs@2.4.1"], ["t", "osyrisrblx/t@3.1.1"], ["cmdr", "evaera/cmdr@1.12.0"]]
 
 [[package]]
 name = "littensy/remo"
@@ -63,6 +63,21 @@ version = "2.4.1"
 dependencies = []
 
 [[package]]
+name = "sleitnick/component"
+version = "2.4.8"
+dependencies = [["Promise", "evaera/promise@4.0.0"], ["Signal", "sleitnick/signal@2.0.3"], ["Symbol", "sleitnick/symbol@2.0.1"], ["Trove", "sleitnick/trove@1.8.0"]]
+
+[[package]]
 name = "sleitnick/signal"
 version = "2.0.3"
+dependencies = []
+
+[[package]]
+name = "sleitnick/symbol"
+version = "2.0.1"
+dependencies = []
+
+[[package]]
+name = "sleitnick/trove"
+version = "1.8.0"
 dependencies = []

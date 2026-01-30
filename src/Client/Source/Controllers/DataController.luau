@@ -1,9 +1,8 @@
--- // Util
 -- // util
 local Network = require("@Shared/Network")
 local Types = require("@Shared/Types")
 
-local Signals = require("@ClientUtility/Signals")
+local Signals = require("@Client/Utility/Signals")
 
 -- // init
 local DataCache = {
