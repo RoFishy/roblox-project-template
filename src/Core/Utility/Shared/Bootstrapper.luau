@@ -5,7 +5,7 @@ local RunService = game:GetService("RunService")
 type LogLevel = "Debugging" | "Information" | "Warning"
 
 -- // Utils
-local Log = require("@Utility/Log")
+local Log = require("@Core/Utility/Shared/Log")
 
 -- // Packages
 local Promise = require("@Packages/TypedPromise")

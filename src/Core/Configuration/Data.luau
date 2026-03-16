@@ -1,5 +1,5 @@
 -- // modules
-local Types = require("@Shared/Types")
+local Types = require("@Core/Utility/Shared/Types")
 
 return {
 	Cash = 0,

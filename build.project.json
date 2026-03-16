@@ -4,8 +4,8 @@
     "$className": "DataModel",
 
     "ReplicatedStorage": {
-      "Shared": {
-        "$path": "dist/Shared"
+      "Core": {
+        "$path": "dist/Core"
       },
       "Client": {
         "$path": "dist/Client/Source"
