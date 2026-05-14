@@ -6,7 +6,7 @@ local Log = require("@Core/Utility/Shared/Log")
 local StartTime = os.clock()
 Log.Warn("Starting Client")
 
-Bootstrapper.load(ReplicatedStorage.Client.Features, {
+Bootstrapper.load(ReplicatedStorage.Client.Systems, {
 	Recursive = true,
 	Suffix = "Controller",
 	UseExplicitFlag = false,

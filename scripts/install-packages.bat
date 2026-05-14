@@ -13,4 +13,8 @@ rem Patch the Wally package link modules to export Luau type definitions
 start /b /wait cmd /c wally-package-types --sourcemap sourcemap.json Packages/
 if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
 
+rem Patch the Wally server-package link modules to export Luau type definitions
+start /b /wait cmd /c wally-package-types --sourcemap sourcemap.json ServerPackages/
+if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
+
 endlocal

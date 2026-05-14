@@ -161,14 +161,14 @@ local function discoverFromFolder(
 		end
 
 		if type(requiredModule) ~= "table" then
-			log("Debugging", `Skipping "{moduleScript:GetFullName()}" because it does not return a table.`)
+			--log("Debugging", `Skipping "{moduleScript:GetFullName()}" because it does not return a table.`)
 			continue
 		end
 
 		local moduleObject = requiredModule :: BootstrapModuleObject
 
 		if not shouldBootstrapModule(moduleScript, options, moduleObject) then
-			log("Debugging", `Skipping non-bootstrap module "{moduleScript:GetFullName()}".`)
+			--log("Debugging", `Skipping non-bootstrap module "{moduleScript:GetFullName()}".`)
 			continue
 		end
 

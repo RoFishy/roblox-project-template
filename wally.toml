@@ -6,15 +6,20 @@ realm = "shared"
 
 [dependencies]
 t = "osyrisrblx/t@3.1.1"
+Charm = "littensy/charm@0.10.0"
 Remo = "littensy/remo@1.5.2"
 Signal = "sleitnick/signal@2.0.3"
-TypedPromise = "howmanysmall/typed-promise@4.0.6"
-Vide = "centau/vide@0.4.0"
+Promise = "howmanysmall/typed-promise@4.0.6"
 Fusion = "elttob/fusion@0.3.0"
-Lyra = "paradoxum-games/lyra@0.6.0"
-Janitor = "howmanysmall/janitor@1.18.3"
+Vide = "centau/vide@0.4.0"
+Lyra = "010devx101/lyra@0.6.3"
+Trove = "sleitnick/trove@1.8.0"
+Ripple = "littensy/ripple@0.10.2"
 UI-Labs = "pepeeltoro41/ui-labs@2.4.1"
+Observers = "sleitnick/observers@0.5.0"
 Sift = "csqrl/sift@0.0.11"
+CharmSync = "littensy/charm-sync@0.3.0"
+
 
 [server-dependencies]
 cmdr = "evaera/cmdr@1.12.0"
