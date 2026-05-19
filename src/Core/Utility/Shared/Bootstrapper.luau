@@ -37,7 +37,7 @@ type BootstrapStore = {
 local Log = require("@Core/Utility/Shared/Log")
 
 -- // Packages
-local Promise = require("@Packages/TypedPromise")
+local Promise = require("@Packages/Promise")
 
 -- // Init
 local Bootstrapper = {
