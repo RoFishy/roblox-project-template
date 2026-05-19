@@ -120,6 +120,10 @@ local function shouldBootstrapModule(
 	local useExplicitFlag = options.UseExplicitFlag == true
 	local suffix = options.Suffix or defaultSuffix
 
+	if endsWith(moduleScript.Name, suffix) then
+		return true
+	end
+
 	if useExplicitFlag then
 		if requiredModuleOrNil and requiredModuleOrNil.IsBootstrapModule ~= nil then
 			return requiredModuleOrNil.IsBootstrapModule == true
@@ -132,7 +136,7 @@ local function shouldBootstrapModule(
 		return false
 	end
 
-	return endsWith(moduleScript.Name, suffix)
+	return false
 end
 
 local function discoverFromFolder(
