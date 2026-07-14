@@ -2,18 +2,20 @@
 
 set -e
 
-development_project="default.project.json"
+if [ "$#" -gt 1 ]; then
+    echo "Usage: sh scripts/analyze.sh [PlaceName]" >&2
+    exit 1
+fi
 
-if [ -n "${1:-}" ]; then
-    selected_project="places/$1/default.project.json"
+. scripts/project.sh
+resolve_project "${1:-}"
 
-    if [ ! -f "$selected_project" ]; then
-        echo "Unknown place: $1" >&2
-        exit 1
-    fi
+development_project="$DEVELOPMENT_PROJECT"
 
-    sed 's#\.\./\.\./##g' "$selected_project" >.active-place.project.json
+if [ -n "$PLACE_NAME" ]; then
+    write_active_project
     development_project=".active-place.project.json"
+    trap 'rm -f .active-place.project.json' EXIT HUP INT TERM
 fi
 
 # If Packages aren't installed, install them.

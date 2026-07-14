@@ -12,17 +12,14 @@ jobs:
   validate:
     name: Validate
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: Install Aftman
-        uses: ok-nick/setup-aftman@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: ok-nick/setup-aftman@v0.4.2
 
-      - name: Install Wally packages
-        run: sh scripts/install-packages.sh
-
-      - name: Validate single-place and multi-place projects
+      - name: Validate root and discovered place projects
         run: sh scripts/validate.sh

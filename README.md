@@ -1,6 +1,6 @@
 # Roblox Project Template
 
-A Rojo template that works as either a traditional single-place game or a multi-place Roblox universe. The root workflow remains the default; multi-place projects are opt-in.
+A Rojo template that works as either a traditional single-place game or a multi-place Roblox universe. The root workflow remains the default; place projects are opt-in and discovered automatically.
 
 ## Requirements
 
@@ -19,17 +19,15 @@ Dependencies are shared by every place. Install them once from the repository ro
 sh scripts/install-packages.sh
 ```
 
-On Windows:
-
 ```bat
 scripts\install-packages.bat
 ```
 
-The development and analysis scripts install packages automatically when `Packages` is missing.
+The dev, analyze, build, and validation scripts install packages automatically when `Packages` is missing.
 
-## Single-place quick start
+## Development
 
-The root project files preserve the original workflow:
+Serve the backward-compatible root project:
 
 ```bash
 sh scripts/dev.sh
@@ -39,11 +37,7 @@ sh scripts/dev.sh
 scripts\dev.bat
 ```
 
-These commands serve `build.project.json`, generate `sourcemap.json` from `default.project.json`, and watch the complete `src` tree with Darklua.
-
-## Multi-place quick start
-
-Select one of the example places by name:
+Pass any directory name found under `places/` to select that place. For example:
 
 ```bash
 sh scripts/dev.sh Lobby
@@ -55,93 +49,92 @@ scripts\dev.bat Lobby
 scripts\dev.bat Gameplay
 ```
 
-Lobby uses port `34872`; Gameplay uses port `34873`. An unknown name exits with an error and lists the available places.
+An unknown name exits with a nonzero status and lists every valid place. The selected dev command serves its build project, creates its sourcemap, and watches the shared source plus only the selected place source through Darklua.
 
 ## Directory structure
 
 ```text
 src/
-|-- Core/                  shared client/server modules
-|-- Client/                shared client runtime, systems, and modules
-|-- Server/                shared server runtime, systems, and modules
+|-- Core/                         shared client/server modules
+|-- Client/                       shared client runtime, systems, and modules
+|-- Server/                       shared server runtime, systems, and modules
 `-- Places/
-    |-- Lobby/
-    |   |-- Core/          place modules shared by client and server
-    |   |-- Client/{Systems,Modules}/
-    |   `-- Server/{Systems,Modules}/
-    `-- Gameplay/          same place-specific layout
+    |-- Lobby/                    example place source
+    `-- Gameplay/                 example place source
 
 places/
 |-- Lobby/{default,build}.project.json
 `-- Gameplay/{default,build}.project.json
 ```
 
-Shared Services and Controllers stay under `src/Server/Source/Systems` and `src/Client/Source/Systems`. A selected place's systems are mounted beneath those same runtime containers in a `Place` folder, so the existing recursive bootstrap lifecycle loads both. Every active Service or Controller must have a unique module name.
+The names are examples, not a fixed list. Every immediate directory under `places/` is a place and must contain both project files plus a matching `src/Places/<PlaceName>` source tree.
 
-Place-specific `Core` modules are available to both client and server under `ReplicatedStorage.Place.Core`. Place client modules live under `ReplicatedStorage.Client.Place.Modules`; place server modules live under `ServerStorage.Place.Modules`. Use the global `@Places` source alias for place code; existing `@Core`, `@Client`, `@Server`, `@Packages`, and `@ServerPackages` aliases are unchanged.
+Shared Services and Controllers stay under `src/Server/Source/Systems` and `src/Client/Source/Systems`. A selected place's systems are mounted beneath those runtime containers in a `Place` folder, so the existing recursive bootstrap lifecycle loads both. Every active Service or Controller must have a unique module name.
+
+Place-specific `Core` modules are available to both client and server under `ReplicatedStorage.Place.Core`. Place client modules live under `ReplicatedStorage.Client.Place.Modules`; place server modules live under `ServerStorage.Place.Modules`. Use the global `@Places` source alias for place code; the existing aliases remain unchanged.
 
 ## Adding a place
 
-1. Copy `places/Lobby` to `places/<PlaceName>`.
-2. Copy `src/Places/Lobby` to `src/Places/<PlaceName>`.
-3. Replace `Lobby` in both copied project files, including names, paths, and the development port.
-4. Add real place code only where needed and run `sh scripts/dev.sh <PlaceName>`.
+1. Copy an existing directory such as `places/Lobby` to `places/Tutorial`.
+2. Copy its source tree from `src/Places/Lobby` to `src/Places/Tutorial`.
+3. Replace the old place name in both new project files, including names, paths, and any development port.
+4. Run `sh scripts/validate.sh`.
+5. Start it with `sh scripts/dev.sh Tutorial` or `scripts\dev.bat Tutorial`.
 
-No additional package installation or bootstrapper is required.
+No dev, analyze, build, validation, CI, package, or bootstrapper edits are required. Validation fails clearly when a directory under `places/` is missing either project file or its matching source tree.
 
 ## Building
 
-First generate `dist` using the sourcemap for the project being built:
+Build the root project in production mode:
 
 ```bash
-rojo sourcemap default.project.json -o sourcemap.json
-ROBLOX_DEV=false darklua process --config .darklua.json src/ dist/
-rojo build build.project.json -o Game.rbxl
+sh scripts/build.sh
 ```
 
-For a selected place, use its development sourcemap and build project:
+```bat
+scripts\build.bat
+```
+
+The output is `builds/Game.rbxl`.
+
+Build any discovered place by name:
 
 ```bash
-mkdir -p \
-    dist/Places/Lobby/Core \
-    dist/Places/Lobby/Client/Systems \
-    dist/Places/Lobby/Client/Modules \
-    dist/Places/Lobby/Server/Systems \
-    dist/Places/Lobby/Server/Modules
-sed 's#\.\./\.\./##g' places/Lobby/default.project.json >.active-place.project.json
-rojo sourcemap .active-place.project.json -o sourcemap.json
-ROBLOX_DEV=false darklua process --config .darklua.json src/ dist/
-rojo build places/Lobby/build.project.json -o Lobby.rbxl
+sh scripts/build.sh Lobby
+sh scripts/build.sh Tutorial
 ```
 
-Replace `Lobby` with another place name as needed.
+```bat
+scripts\build.bat Lobby
+scripts\build.bat Tutorial
+```
 
-The selected development scripts generate the ignored `.active-place.project.json` with paths rebased to the repository root. This keeps Rojo 7.5.1 sourcemaps compatible with Darklua while the tracked project under `places/<PlaceName>` remains the source of truth.
+Place outputs are written to `builds/<PlaceName>.rbxl`. The scripts install packages when needed, generate the correct sourcemap, run Darklua with `ROBLOX_DEV=false`, and invoke the matching build project. `builds/`, `dist/`, `sourcemap.json`, and `.active-place.project.json` are generated and ignored by Git.
 
 ## Analysis and validation
 
-Analyze the root or one selected place:
+Analyze the root or any discovered place:
 
 ```bash
 sh scripts/analyze.sh
 sh scripts/analyze.sh Lobby
-sh scripts/analyze.sh Gameplay
+sh scripts/analyze.sh Tutorial
 ```
 
-Run every project, JSON, Darklua, Luau, Selene, and StyLua check with:
+Unknown names fail and list the available places. Run the complete repository check with:
 
 ```bash
 sh scripts/validate.sh
 ```
 
-CI runs the same complete validation without Roblox Studio.
+Validation discovers every immediate directory under `places/` and checks tracked JSON, root/place isolation, both Rojo projects, production Darklua builds, Luau analysis with the selected sourcemap, Selene, StyLua, shell syntax, invalid-name handling, and the Windows entry points. Zero place directories is valid; an incomplete place directory is not. CI runs the same command.
 
 ## Roblox IDs and teleport testing
 
-This public template intentionally contains no `gameId`, `placeId`, `servePlaceIds`, or teleport destination IDs. Add the first three as top-level fields in the appropriate place project after creating your Roblox experience. Configure teleport destination IDs explicitly in your own game configuration; do not treat placeholder values as valid.
+This public template intentionally contains no `gameId`, `placeId`, `servePlaceIds`, or teleport destination IDs. Add the first three as top-level fields in the appropriate project after creating your Roblox experience. Configure teleport destination IDs explicitly in your own game configuration; do not treat placeholder values as valid.
 
 Rojo and static analysis can validate project structure, but actual teleport behavior must be tested in a published Roblox experience.
 
 ## Git expectations
 
-Commit source, project files, and documentation. Do not commit generated `dist`, package directories, sourcemaps, downloaded Luau global types, lock files, or built Roblox place/model files; they are ignored by Git.
+Commit source, project files, scripts, and documentation. Do not commit generated `dist`, `builds`, package directories, sourcemaps, downloaded Luau global types, lock files, or built Roblox place/model files; they are ignored by Git.
