@@ -6,3 +6,5 @@ Packages/
 **/sourcemap.json
 dist/
 *.lock
+/globalTypes.d.lua
+/.active-place.project.json

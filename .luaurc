@@ -4,7 +4,8 @@
         "ServerPackages": "ServerPackages/",
         "Server": "src/Server/Source/",
         "Client": "src/Client/Source/",
-        "Core": "src/Core/"
+        "Core": "src/Core/",
+        "Places": "src/Places/"
     },
     "languageMode": "strict"
 }
