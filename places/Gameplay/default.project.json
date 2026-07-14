@@ -1,0 +1,70 @@
+{
+  "name": "RobloxProjectTemplate - Gameplay",
+  "servePort": 34873,
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "Core": {
+        "$path": "../../src/Core"
+      },
+      "Client": {
+        "$path": "../../src/Client/Source",
+        "Systems": {
+          "$className": "Folder",
+          "Place": {
+            "$path": "../../src/Places/Gameplay/Client/Systems"
+          }
+        },
+        "Place": {
+          "$className": "Folder",
+          "Modules": {
+            "$path": "../../src/Places/Gameplay/Client/Modules"
+          }
+        }
+      },
+      "Place": {
+        "$className": "Folder",
+        "Core": {
+          "$path": "../../src/Places/Gameplay/Core"
+        }
+      },
+      "Packages": {
+        "$path": "../../Packages"
+      }
+    },
+
+    "ServerScriptService": {
+      "Runtime": {
+        "$path": "../../src/Server/Runtime"
+      }
+    },
+
+    "ServerStorage": {
+      "$path": "../../src/Server/Source",
+      "Systems": {
+        "$className": "Folder",
+        "Place": {
+          "$path": "../../src/Places/Gameplay/Server/Systems"
+        }
+      },
+      "Place": {
+        "$className": "Folder",
+        "Modules": {
+          "$path": "../../src/Places/Gameplay/Server/Modules"
+        }
+      },
+      "Packages": {
+        "$path": "../../ServerPackages"
+      }
+    },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Runtime": {
+          "$path": "../../src/Client/Runtime"
+        }
+      }
+    }
+  }
+}
