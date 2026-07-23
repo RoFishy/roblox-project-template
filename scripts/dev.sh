@@ -15,6 +15,7 @@ development_project="$DEVELOPMENT_PROJECT"
 if [ -n "$PLACE_NAME" ]; then
     write_active_project
     development_project=".active-place.project.json"
+    trap 'rm -f .active-place.project.json' EXIT HUP INT TERM
 fi
 
 prepare_place_dist
@@ -22,7 +23,7 @@ prepare_place_dist
 if [ "${DEV_DRY_RUN:-}" = "1" ]; then
     printf 'rojo serve %s\n' "$BUILD_PROJECT"
     printf 'rojo sourcemap %s -o sourcemap.json --watch\n' "$development_project"
-    printf 'ROBLOX_DEV=true darklua process --config .darklua.json --watch src/ dist/\n'
+    print_watch_commands
     exit 0
 fi
 
@@ -33,4 +34,4 @@ fi
 
 rojo serve "$BUILD_PROJECT" \
     & rojo sourcemap "$development_project" -o sourcemap.json --watch \
-    & ROBLOX_DEV=true darklua process --config .darklua.json --watch src/ dist/
+    & watch_sources

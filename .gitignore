@@ -7,5 +7,5 @@ Packages/
 dist/
 builds/
 *.lock
-/globalTypes.d.lua
+globalTypes.d.lua
 /.active-place.project.json

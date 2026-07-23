@@ -15,6 +15,7 @@ if not "%~1"=="" (
     if not exist "places\%~1\" goto :unknown_place
     if not exist "places\%~1\default.project.json" goto :invalid_place
     if not exist "places\%~1\build.project.json" goto :invalid_place
+    if not exist "src\Places\%~1\" goto :invalid_place
 
     set "SELECTED_PROJECT=places\%~1\default.project.json"
     set "BUILD_PROJECT=places\%~1\build.project.json"
@@ -22,8 +23,8 @@ if not "%~1"=="" (
 )
 
 if defined PLACE_NAME (
-    powershell.exe -NoProfile -Command "$content = Get-Content -Raw -LiteralPath $env:SELECTED_PROJECT; [IO.File]::WriteAllText((Join-Path (Get-Location).Path '.active-place.project.json'), $content.Replace('../../', ''))"
-    if errorlevel 1 exit /b 1
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0write-active-project.ps1" "%SELECTED_PROJECT%"
+    if errorlevel 1 goto :failed
     set "DEVELOPMENT_PROJECT=.active-place.project.json"
 )
 
@@ -50,8 +51,14 @@ rojo sourcemap "%DEVELOPMENT_PROJECT%" -o sourcemap.json
 if errorlevel 1 goto :failed
 
 set "ROBLOX_DEV=false"
-darklua process --config .darklua.json src/ dist/
-if errorlevel 1 goto :failed
+for %%D in (Core Client Server) do (
+    darklua process --config .darklua.json "src/%%D" "dist/%%D"
+    if errorlevel 1 goto :failed
+)
+if defined PLACE_NAME (
+    darklua process --config .darklua.json "src/Places/%PLACE_NAME%" "dist/Places/%PLACE_NAME%"
+    if errorlevel 1 goto :failed
+)
 
 rojo build "%BUILD_PROJECT%" -o "%OUTPUT_PATH%"
 if errorlevel 1 goto :failed
@@ -71,15 +78,15 @@ echo Unknown place: %~1 1>&2
 goto :list_places
 
 :invalid_place
-echo Invalid place: %~1 requires default.project.json and build.project.json 1>&2
+echo Invalid place: %~1 requires both project files and src/Places/%~1 1>&2
 
 :list_places
 echo Available places: 1>&2
 set "FOUND_PLACE="
-for /d %%D in ("places\*") do if exist "%%~fD\default.project.json" if exist "%%~fD\build.project.json" (
+for /d %%D in ("places\*") do if exist "%%~fD\default.project.json" if exist "%%~fD\build.project.json" if exist "src\Places\%%~nxD\" (
     echo   %%~nxD 1>&2
     set "FOUND_PLACE=1"
 )
-if not defined FOUND_PLACE echo   ^(none^) 1>&2
+if not defined FOUND_PLACE echo   ^(no optional places currently exist^) 1>&2
 endlocal
 exit /b 1
