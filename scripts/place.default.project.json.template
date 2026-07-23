@@ -1,32 +1,32 @@
 {
-  "name": "RobloxProjectTemplate - Gameplay Build",
-  "servePort": 34873,
+  "name": "RobloxProjectTemplate - __PLACE_NAME__",
+  "servePort": __SERVE_PORT__,
   "tree": {
     "$className": "DataModel",
 
     "ReplicatedStorage": {
       "Core": {
-        "$path": "../../dist/Core"
+        "$path": "../../src/Core"
       },
       "Client": {
-        "$path": "../../dist/Client/Source",
+        "$path": "../../src/Client/Source",
         "Systems": {
           "$className": "Folder",
           "Place": {
-            "$path": "../../dist/Places/Gameplay/Client/Systems"
+            "$path": "../../src/Places/__PLACE_NAME__/Client/Systems"
           }
         },
         "Place": {
           "$className": "Folder",
           "Modules": {
-            "$path": "../../dist/Places/Gameplay/Client/Modules"
+            "$path": "../../src/Places/__PLACE_NAME__/Client/Modules"
           }
         }
       },
       "Place": {
         "$className": "Folder",
         "Core": {
-          "$path": "../../dist/Places/Gameplay/Core"
+          "$path": "../../src/Places/__PLACE_NAME__/Core"
         }
       },
       "Packages": {
@@ -36,22 +36,22 @@
 
     "ServerScriptService": {
       "Runtime": {
-        "$path": "../../dist/Server/Runtime"
+        "$path": "../../src/Server/Runtime"
       }
     },
 
     "ServerStorage": {
-      "$path": "../../dist/Server/Source",
+      "$path": "../../src/Server/Source",
       "Systems": {
         "$className": "Folder",
         "Place": {
-          "$path": "../../dist/Places/Gameplay/Server/Systems"
+          "$path": "../../src/Places/__PLACE_NAME__/Server/Systems"
         }
       },
       "Place": {
         "$className": "Folder",
         "Modules": {
-          "$path": "../../dist/Places/Gameplay/Server/Modules"
+          "$path": "../../src/Places/__PLACE_NAME__/Server/Modules"
         }
       },
       "Packages": {
@@ -62,7 +62,7 @@
     "StarterPlayer": {
       "StarterPlayerScripts": {
         "Runtime": {
-          "$path": "../../dist/Client/Runtime"
+          "$path": "../../src/Client/Runtime"
         }
       }
     }

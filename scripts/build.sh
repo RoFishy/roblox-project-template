@@ -34,6 +34,6 @@ fi
 
 mkdir -p "$(dirname "$output_path")"
 rojo sourcemap "$sourcemap_project" -o sourcemap.json
-ROBLOX_DEV=false darklua process --config .darklua.json src/ dist/
+process_sources false
 rojo build "$BUILD_PROJECT" -o "$output_path"
 printf 'Built %s\n' "$output_path"

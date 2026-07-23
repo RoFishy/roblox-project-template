@@ -28,7 +28,12 @@ if [ ! -f "globalTypes.d.lua" ]; then
     curl -L -o globalTypes.d.lua https://raw.githubusercontent.com/JohnnyMorganz/luau-lsp/main/scripts/globalTypes.d.lua
 fi
 
+set -- src/Core src/Client src/Server
+if [ -n "$PLACE_NAME" ]; then
+    set -- "$@" "src/Places/$PLACE_NAME"
+fi
+
 luau-lsp analyze --definitions=globalTypes.d.lua --base-luaurc=.luaurc \
     --sourcemap=sourcemap.json --settings=.vscode/settings.json \
     --no-strict-dm-types --ignore Packages/**/*.lua --ignore Packages/**/*.luau \
-    src/
+    "$@"
